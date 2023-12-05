@@ -7,7 +7,11 @@ const HomeScreen = ({ navigation }) => {
       <Text>Pantalla de Inicio de Aplicacion</Text>
       <Button
         title="Ir a Perfil de Usuario"
-        onPress={() => navigation.navigate("Profile")}
+        onPress={() => navigation.navigate("Profile",{
+          profileId: "1459-5896-5423-5823",
+          profileName: "Mario Alberto Guerra Solares",
+          jobPosition: "Senior Backend Developer"
+        })}
       />
       
     </View>
