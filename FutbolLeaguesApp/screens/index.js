@@ -1,3 +1,4 @@
 import LeaguesScreen from "./LeaguesScreen";
+import LeagueTeamsScreen from "./LeagueTeamsScreen";
 
-export {LeaguesScreen};
+export {LeaguesScreen, LeagueTeamsScreen};

@@ -1,3 +1,4 @@
 import League from "./league";
+import Team from "./team";
 
-export {League};
+export {League, Team};
