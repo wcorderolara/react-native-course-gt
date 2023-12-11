@@ -11,66 +11,77 @@ import {
   TeamNewsScreen,
 } from "./screens/team";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import TeamContextProvider from "./store/ctx/team-context";
+import TeamContextProvider, { TeamContext } from "./store/ctx/team-context";
+import { useContext, useEffect } from "react";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const TeamNavigator = () => (
-  <Tab.Navigator
-    screenOptions={{
-      headerShown: false,
-      tabBarActiveTintColor: "#f9fafb",
-      tabBarInactiveTintColor: "#64748b",
-      tabBarStyle: { backgroundColor: "#030712" },
-    }}
-  >
-    <Tab.Screen
-      name="TeamInfo"
-      component={TeamInfoScreen}
-      options={{
-        tabBarLabel: "Info",
-        tabBarIcon: ({ color, size }) => (
-          <Ionicons name="information-circle" color={color} size={size} />
-        ),
+const TeamNavigator = ({navigation}) => {
+  const { headerTeamTitle } = useContext(TeamContext);
+
+  useEffect( () => {
+    navigation.setOptions({
+      title: headerTeamTitle
+    })
+  },[headerTeamTitle, navigation])
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#f9fafb",
+        tabBarInactiveTintColor: "#64748b",
+        tabBarStyle: { backgroundColor: "#030712" },
       }}
-    />
-    <Tab.Screen
-      name="TeamTrophies"
-      component={TeamTrophiesScreen}
-      options={{
-        tabBarLabel: "Palmares",
-        tabBarIcon: ({ color, size }) => (
-          <Ionicons name="trophy" color={color} size={size} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="TeamLeyends"
-      component={TeamLeyendsScreen}
-      options={{
-        tabBarLabel: "Leyendas",
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons
-            name="account-star"
-            color={color}
-            size={size}
-          />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="TeamNews"
-      component={TeamNewsScreen}
-      options={{
-        tabBarLabel: "News",
-        tabBarIcon: ({ color, size }) => (
-          <Ionicons name="newspaper" color={color} size={size} />
-        ),
-      }}
-    />
-  </Tab.Navigator>
-);
+    >
+      <Tab.Screen
+        name="TeamInfo"
+        component={TeamInfoScreen}
+        options={{
+          tabBarLabel: "Info",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="information-circle" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TeamTrophies"
+        component={TeamTrophiesScreen}
+        options={{
+          tabBarLabel: "Palmares",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="trophy" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TeamLeyends"
+        component={TeamLeyendsScreen}
+        options={{
+          tabBarLabel: "Leyendas",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="account-star"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TeamNews"
+        component={TeamNewsScreen}
+        options={{
+          tabBarLabel: "News",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="newspaper" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export default function App() {
   return (

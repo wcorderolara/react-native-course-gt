@@ -7,16 +7,16 @@ import {
   Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { TeamContext } from "../store/ctx/team-context";
 
 const TeamTile = ({ id, imageUrl, name, city, year }) => {
   const navigation = useNavigation();
+  const {updateTeamId} = useContext(TeamContext);
 
   function onSelectTeamHandler() {
-    // navigation.navigate("Team");
-    navigation.navigate("Team", {
-        screen: "TeamInfo",
-        params: {teamName: name}
-    })
+    updateTeamId(id);
+    navigation.navigate("Team");
   }
   return (
     <View style={styles.teamItem}>

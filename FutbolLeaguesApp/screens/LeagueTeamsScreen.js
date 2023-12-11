@@ -1,22 +1,25 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import { LEAGUES, TEAMS } from "../data/dummy-database";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useContext, useLayoutEffect } from "react";
 import { TeamTile } from "../components";
+import { fetchTeams } from "../utils/http";
+import { TeamContext } from "../store/ctx/team-context";
 
 const LeagueTeamsScreen = ({ route, navigation }) => {
   const [leagueTeams, setLeagueTeams] = useState([]);
+  const {leagues} = useContext(TeamContext);
 
   useLayoutEffect(() => {
+    async function getTeams(leagueId) {
+      const _teams = await fetchTeams(leagueId);
+      setLeagueTeams(_teams.data);
+    }
     if (route.params?.leagueId) {
-      const teams = TEAMS.filter(
-        (team) => team.idLeague === route.params.leagueId
-      );
-      const screenTitle = LEAGUES.find( (item) => item.id === route.params.leagueId).name;
-
-      setLeagueTeams(teams);
+      const screenTitle = leagues.find( (item) => item.id === route.params.leagueId).name;
       navigation.setOptions({
         title: screenTitle
       })
+
+      getTeams(route.params.leagueId);
     }
   }, [route.params.leagueId, navigation]);
 
