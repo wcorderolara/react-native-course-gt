@@ -6,7 +6,6 @@ import {fetchLeagues} from "../utils/http"
 import { TeamContext } from "../store/ctx/team-context";
 
 const LeaguesScreen = () => {
-  // const [leagues, setLeagues] = useState([]);
   const {leagues, updateLeagues} = useContext(TeamContext);
 
   useEffect( () => {

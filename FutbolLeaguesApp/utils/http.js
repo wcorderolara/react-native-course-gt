@@ -15,3 +15,17 @@ export async function fetchTeams(leagueId) {
     return teams;
 }
 
+export async function fetchTeamInfo(teamId) {
+    const response = await axios.get(`${baseUrl}/teams/info/${teamId}`);
+    const info = response.data.data;
+
+    return info
+}
+
+export async function fetchTeamTrophies(teamId) {
+    const response = await axios.get(`${baseUrl}/teams/trophies/${teamId}`);
+    const trophies = response.data.data;
+
+    return trophies
+}
+

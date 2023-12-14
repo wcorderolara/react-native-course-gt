@@ -17,6 +17,6 @@ exports.getTrophiesByTeam = (req, res) => {
 
 exports.getInfoByTeam = (req, res) => {
     const teamInfo = INFO.filter( (info) => info.idTeam == req.params.teamId);
-    res.json({status: res.statusCode, data: teamInfo})
+    res.json({status: res.statusCode, data: teamInfo[0]})
 }
 
